@@ -2,12 +2,13 @@ using System;
 using UnityEngine;
 using VContainer;
 using CarTurretGame.Input;
+using CarTurretGame.Gameplay.Health;
 
 namespace CarTurretGame.Gameplay
 {
     public enum CarState { WaitingForTap, Moving, Finished }
 
-    public class CarController : MonoBehaviour
+    public class CarController : MonoBehaviour, IDamageable
     {
         [Header("Movement")]
         [SerializeField] private float speed = 8f;
