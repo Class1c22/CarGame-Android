@@ -1,6 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 using CarTurretGame.Input;
+using CarTurretGame.Gameplay.Enemies;
 using CarTurretGame.Gameplay;
 
 namespace CarTurretGame.Core
@@ -14,6 +15,7 @@ namespace CarTurretGame.Core
                    
             builder.RegisterComponentInHierarchy<CarController>();
             // builder.RegisterComponentInHierarchy<TurretController>();
+            builder.RegisterComponentInHierarchy<EnemySpawner>();
         }
     }
 }

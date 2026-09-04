@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4385388636887425000}
   - component: {fileID: 1961582564550732578}
   - component: {fileID: 3629590700092893660}
+  - component: {fileID: 4481034098661482481}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -107,3 +108,27 @@ MonoBehaviour:
   speed: 20
   damage: 10
   lifeTime: 3
+  hitRadius: 0.15
+--- !u!136 &4481034098661482481
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15776356063955703}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.01
+  m_Height: 0.02
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.6566123e-10, z: -0.001509614}

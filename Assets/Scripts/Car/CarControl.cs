@@ -8,6 +8,7 @@ namespace CarTurretGame.Gameplay
 {
     public enum CarState { WaitingForTap, Moving, Finished }
 
+    [RequireComponent(typeof(Collider))]
     public class CarController : MonoBehaviour, IDamageable
     {
         [Header("Movement")]
@@ -37,6 +38,9 @@ namespace CarTurretGame.Gameplay
         private void Awake()
         {
             CurrentHealth = maxHealth;
+
+            var col = GetComponent<Collider>();
+            col.isTrigger = false; // фізичний колайдер, тригер тут не обов'язковий
         }
 
         private void OnDestroy()

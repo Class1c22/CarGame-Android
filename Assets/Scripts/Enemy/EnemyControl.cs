@@ -4,7 +4,8 @@ using CarTurretGame.Gameplay.Health;
 
 namespace CarTurretGame.Gameplay.Enemies
 {
-
+    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class EnemyControl : MonoBehaviour, IDamageable
     {
         [Header("Health")]
@@ -14,12 +15,11 @@ namespace CarTurretGame.Gameplay.Enemies
         [SerializeField] private float runSpeed = 3f;
         [SerializeField] private float triggerDistance = 15f;
         [SerializeField] private float damageToCarPerHit = 10f;
-        [SerializeField] private float damageCooldown = 1f;
 
         private float _currentHealth;
         private CarController _car;
         private bool _isChasing;
-        private float _damageTimer;
+        private bool _hasHit;
 
         [Inject]
         public void Construct(CarController car)
@@ -30,11 +30,18 @@ namespace CarTurretGame.Gameplay.Enemies
         private void Awake()
         {
             _currentHealth = maxHealth;
+
+            var col = GetComponent<Collider>();
+            col.isTrigger = true;
+
+            var rb = GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.useGravity = false;
         }
 
         private void Update()
         {
-            if (_car == null || _car.State != CarState.Moving) return;
+            if (_car == null || _car.State != CarState.Moving || _hasHit) return;
 
             float dist = Vector3.Distance(transform.position, _car.transform.position);
 
@@ -65,16 +72,13 @@ namespace CarTurretGame.Gameplay.Enemies
 
         private void OnTriggerStay(Collider other)
         {
-            if (_damageTimer > 0f)
-            {
-                _damageTimer -= Time.deltaTime;
-                return;
-            }
+            if (_hasHit) return;
 
             if (other.GetComponentInParent<CarController>() != null)
             {
+                _hasHit = true;
                 _car.TakeDamage(damageToCarPerHit);
-                _damageTimer = damageCooldown;
+                Destroy(gameObject);
             }
         }
     }
