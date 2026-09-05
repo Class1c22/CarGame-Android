@@ -15,6 +15,13 @@ namespace CarTurretGame.Gameplay
         [SerializeField] private float speed = 8f;
         [SerializeField] private float levelLength = 300f;
 
+        [Header("Side Drift")]
+        [SerializeField] private float roadHalfWidth = 2.2f;
+        [SerializeField] private float driftChangeIntervalMin = 4f;
+        [SerializeField] private float driftChangeIntervalMax = 6f;
+        [SerializeField] private float driftSmoothTime = 1.2f;
+        [SerializeField] private float maxDriftOffset = 1.5f;
+
         [Header("Health")]
         [SerializeField] private float maxHealth = 100f;
 
@@ -28,6 +35,12 @@ namespace CarTurretGame.Gameplay
 
         private IInputService _inputService;
 
+        private float _baseX;
+        private float _targetOffsetX;
+        private float _currentOffsetX;
+        private float _driftVelocity;
+        private float _driftTimer;
+
         [Inject]
         public void Construct(IInputService inputService)
         {
@@ -40,7 +53,10 @@ namespace CarTurretGame.Gameplay
             CurrentHealth = maxHealth;
 
             var col = GetComponent<Collider>();
-            col.isTrigger = false; // фізичний колайдер, тригер тут не обов'язковий
+            col.isTrigger = false;
+
+            _baseX = transform.position.x;
+            PickNewDriftTarget();
         }
 
         private void OnDestroy()
@@ -53,10 +69,37 @@ namespace CarTurretGame.Gameplay
         {
             if (State != CarState.Moving) return;
 
-            transform.Translate(Vector3.forward * (speed * Time.deltaTime), Space.World);
+            UpdateDrift();
 
-            if (transform.position.z >= levelLength)
+            Vector3 pos = transform.position;
+            pos.z += speed * Time.deltaTime;
+            pos.x = _baseX + _currentOffsetX;
+            transform.position = pos;
+
+            if (pos.z >= levelLength)
                 Win();
+        }
+
+        private void UpdateDrift()
+        {
+            _driftTimer -= Time.deltaTime;
+            if (_driftTimer <= 0f)
+            {
+                PickNewDriftTarget();
+            }
+
+            _currentOffsetX = Mathf.SmoothDamp(
+                _currentOffsetX,
+                _targetOffsetX,
+                ref _driftVelocity,
+                driftSmoothTime);
+        }
+
+        private void PickNewDriftTarget()
+        {
+            float limit = Mathf.Min(maxDriftOffset, roadHalfWidth);
+            _targetOffsetX = UnityEngine.Random.Range(-limit, limit);
+            _driftTimer = UnityEngine.Random.Range(driftChangeIntervalMin, driftChangeIntervalMax);
         }
 
         private void OnTapped()

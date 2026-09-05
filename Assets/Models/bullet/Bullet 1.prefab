@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 3397868056337807714}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: 0, z: -0, w: 0.0000000754979}
-  m_LocalPosition: {x: 2.31348, y: -2.23, z: -16.8276}
-  m_LocalScale: {x: 8.902853, y: 9.004274, z: 20.02175}
+  m_LocalPosition: {x: 2.31348, y: -2.23, z: -16.856}
+  m_LocalScale: {x: 17.346008, y: 17.543615, z: 39.00968}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4321472bb8b4a6447993b1ae0117a1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarTurretGame.Gameplay.Turret.Bullet
-  speed: 20
+  speed: 70
   damage: 20
   lifeTime: 3
   hitRadius: 0.15

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6772094244946633170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3361294316773697811}
+  - component: {fileID: 5753210239837234786}
+  m_Layer: 0
+  m_Name: BloodChunkSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3361294316773697811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6772094244946633170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.44294, y: 0, z: -11.27398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5753210239837234786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6772094244946633170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0fc795fda3873488ba93b7f2cbd3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarTurretGame.Gameplay.Enemies.BloodChunkSpawner
+  chunkPrefabs:
+  - {fileID: 1452161734423270289, guid: 44f7fefac98655641851c1ca6359ed32, type: 3}
+  - {fileID: 681324750158854287, guid: 2165eef0b39006c4588595a20a989c7c, type: 3}
+  - {fileID: 6285300461083283660, guid: 3ca2951a200789e43b69b221a79d669b, type: 3}
+  chunkCount: 10
+  spawnRadius: 0.3
+  minForce: 3
+  maxForce: 7
+  upwardForce: 2
+  torqueStrength: 5
+  scaleRange: {x: 0.5, y: 1.2}
+  lifeTime: 6
+  freezeAfterSeconds: 2
