@@ -17,6 +17,9 @@ namespace CarTurretGame.Gameplay.Enemies
         [SerializeField] private float triggerDistance = 15f;
         [SerializeField] private float damageToCarPerHit = 10f;
 
+        [Header("Death")]
+        [SerializeField] private BloodChunkSpawner bloodChunkSpawner;
+
         [Header("Idle Wander")]
         [SerializeField] private float wanderRadius = 1.5f;
         [SerializeField] private float wanderSpeed = 1f;
@@ -167,7 +170,7 @@ namespace CarTurretGame.Gameplay.Enemies
 
             if (_currentHealth <= 0f)
             {
-                Destroy(gameObject);
+                Die(transform.position - transform.forward);
                 return;
             }
 
@@ -223,6 +226,19 @@ namespace CarTurretGame.Gameplay.Enemies
             }
         }
 
+        private void Die(Vector3 explosionSource)
+        {
+            if (_hasHit) return;
+            _hasHit = true;
+
+            if (bloodChunkSpawner != null)
+            {
+                bloodChunkSpawner.SpawnAt(transform.position);
+            }
+
+            Destroy(gameObject);
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (_hasHit) return;
@@ -230,9 +246,8 @@ namespace CarTurretGame.Gameplay.Enemies
             var car = other.GetComponentInParent<CarController>();
             if (car != null)
             {
-                _hasHit = true;
                 _car.TakeDamage(damageToCarPerHit);
-                Destroy(gameObject);
+                Die(car.transform.position);
             }
         }
     }

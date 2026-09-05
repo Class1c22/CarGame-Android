@@ -6,7 +6,6 @@ using CarTurretGame.Gameplay;
 
 namespace CarTurretGame.Gameplay.Enemies
 {
-
     public class EnemySpawner : MonoBehaviour
     {
         [Header("Prefabs")]
@@ -14,6 +13,7 @@ namespace CarTurretGame.Gameplay.Enemies
 
         [Header("Road")]
         [SerializeField] private float roadHalfWidth = 4f;
+        [SerializeField] private float roadCenterOffsetX = 0f;
         [SerializeField] private float minSpacing = 1.2f;
 
         [Header("Segments")]
@@ -26,6 +26,10 @@ namespace CarTurretGame.Gameplay.Enemies
         [SerializeField] private Vector2Int groupsPerSegment = new Vector2Int(2, 4);
         [SerializeField] private Vector2Int enemiesPerSegment = new Vector2Int(6, 14);
         [SerializeField] private float groupRadius = 2.5f;
+
+        [Header("Ground Raycast")]
+        [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private float raycastHeight = 50f;
 
         private CarController _car;
         private IObjectResolver _resolver;
@@ -67,7 +71,7 @@ namespace CarTurretGame.Gameplay.Enemies
             for (int g = 0; g < groupCount; g++)
             {
                 Vector3 groupCenter = new Vector3(
-                    Random.Range(-roadHalfWidth, roadHalfWidth),
+                    roadCenterOffsetX + Random.Range(-roadHalfWidth, roadHalfWidth),
                     0f,
                     Random.Range(zStart, zEnd));
 
@@ -89,7 +93,7 @@ namespace CarTurretGame.Gameplay.Enemies
             {
                 Vector2 offset = Random.insideUnitCircle * groupRadius;
                 Vector3 pos = new Vector3(
-                    Mathf.Clamp(groupCenter.x + offset.x, -roadHalfWidth, roadHalfWidth),
+                    Mathf.Clamp(groupCenter.x + offset.x, roadCenterOffsetX - roadHalfWidth, roadCenterOffsetX + roadHalfWidth),
                     0f,
                     Mathf.Clamp(groupCenter.z + offset.y, zStart, zEnd));
 
@@ -101,7 +105,7 @@ namespace CarTurretGame.Gameplay.Enemies
             }
 
             Vector3 fallback = new Vector3(
-                Random.Range(-roadHalfWidth, roadHalfWidth), 0f,
+                roadCenterOffsetX + Random.Range(-roadHalfWidth, roadHalfWidth), 0f,
                 Random.Range(zStart, zEnd));
             _occupiedInSegment.Add(fallback);
             return fallback;
@@ -118,20 +122,36 @@ namespace CarTurretGame.Gameplay.Enemies
             return true;
         }
 
-        private void SpawnEnemyAt(Vector3 worldPos)
+        private void SpawnEnemyAt(Vector3 flatPos)
         {
             if (enemyPrefabs == null || enemyPrefabs.Length == 0) return;
 
+            Vector3 worldPos = ProjectToGround(flatPos);
+
             var prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
             _resolver.Instantiate(prefab, worldPos, Quaternion.identity, transform);
+        }
+
+        private Vector3 ProjectToGround(Vector3 point)
+        {
+            Vector3 rayOrigin = point + Vector3.up * raycastHeight;
+
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, raycastHeight * 2f, groundLayer))
+            {
+                return hit.point;
+            }
+
+            return point;
         }
 
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(new Vector3(-roadHalfWidth, 0, 0), new Vector3(-roadHalfWidth, 0, levelLength));
-            Gizmos.DrawLine(new Vector3(roadHalfWidth, 0, 0), new Vector3(roadHalfWidth, 0, levelLength));
+            float leftX = roadCenterOffsetX - roadHalfWidth;
+            float rightX = roadCenterOffsetX + roadHalfWidth;
+            Gizmos.DrawLine(new Vector3(leftX, 0, 0), new Vector3(leftX, 0, levelLength));
+            Gizmos.DrawLine(new Vector3(rightX, 0, 0), new Vector3(rightX, 0, levelLength));
         }
 #endif
     }

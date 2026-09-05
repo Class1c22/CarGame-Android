@@ -90,6 +90,7 @@ MonoBehaviour:
   runSpeed: 5
   triggerDistance: 10
   damageToCarPerHit: 10
+  bloodChunkSpawner: {fileID: 5753210239837234786, guid: 5bba3961bb4d99347956af18d6e4e654, type: 3}
   wanderRadius: 1.5
   wanderSpeed: 1
   wanderPauseMin: 0.5
