@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using VContainer;
 using CarTurretGame.Gameplay.Health;
@@ -22,14 +23,32 @@ namespace CarTurretGame.Gameplay.Enemies
         [SerializeField] private float wanderPauseMin = 0.5f;
         [SerializeField] private float wanderPauseMax = 2f;
 
+        [Header("Animation")]
+        [SerializeField] private Animator animator;
+        [SerializeField] private float hitStunDuration = 1f;
+        [SerializeField] private float speedDampTime = 0.1f;
+
+        [Header("Hit Flash")]
+        [SerializeField] private Renderer[] renderers;
+        [SerializeField] private Material hitFlashMaterial;
+        [SerializeField] private float hitFlashDuration = 0.15f;
+
+        private static readonly int SpeedHash = Animator.StringToHash("Speed");
+        private static readonly int HitHash = Animator.StringToHash("Hit");
+        private static readonly int HitIndexHash = Animator.StringToHash("HitIndex");
+
         private float _currentHealth;
         private CarController _car;
         private bool _isChasing;
         private bool _hasHit;
+        private float _hitStunTimer;
 
         private Vector3 _spawnPosition;
         private Vector3 _wanderTarget;
         private float _wanderTimer;
+
+        private Material[][] _originalMaterials;
+        private Coroutine _flashRoutine;
 
         [Inject]
         public void Construct(CarController car)
@@ -41,12 +60,29 @@ namespace CarTurretGame.Gameplay.Enemies
         {
             _currentHealth = maxHealth;
 
+            if (animator == null)
+                animator = GetComponentInChildren<Animator>();
+
+            if (renderers == null || renderers.Length == 0)
+                renderers = GetComponentsInChildren<Renderer>();
+
+            CacheOriginalMaterials();
+
             var col = GetComponent<Collider>();
             col.isTrigger = true;
 
             var rb = GetComponent<Rigidbody>();
             rb.isKinematic = true;
             rb.useGravity = false;
+        }
+
+        private void CacheOriginalMaterials()
+        {
+            _originalMaterials = new Material[renderers.Length][];
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                _originalMaterials[i] = renderers[i].materials;
+            }
         }
 
         private void Start()
@@ -58,6 +94,12 @@ namespace CarTurretGame.Gameplay.Enemies
         private void Update()
         {
             if (_hasHit) return;
+
+            if (_hitStunTimer > 0f)
+            {
+                _hitStunTimer -= Time.deltaTime;
+                return;
+            }
 
             if (_car != null && _car.State == CarState.Moving)
             {
@@ -72,10 +114,12 @@ namespace CarTurretGame.Gameplay.Enemies
             if (_isChasing)
             {
                 Chase();
+                animator.SetFloat(SpeedHash, 1f, speedDampTime, Time.deltaTime);
             }
             else
             {
-                Wander();
+                bool isMoving = Wander();
+                animator.SetFloat(SpeedHash, isMoving ? 0.5f : 0f, speedDampTime, Time.deltaTime);
             }
         }
 
@@ -87,7 +131,7 @@ namespace CarTurretGame.Gameplay.Enemies
             transform.LookAt(_car.transform.position);
         }
 
-        private void Wander()
+        private bool Wander()
         {
             float dist = Vector3.Distance(transform.position, _wanderTarget);
 
@@ -98,13 +142,14 @@ namespace CarTurretGame.Gameplay.Enemies
                 {
                     PickNewWanderTarget();
                 }
-                return;
+                return false;
             }
 
             var dir = (_wanderTarget - transform.position).normalized;
             dir.y = 0f;
             transform.position += dir * wanderSpeed * Time.deltaTime;
             transform.LookAt(new Vector3(_wanderTarget.x, transform.position.y, _wanderTarget.z));
+            return true;
         }
 
         private void PickNewWanderTarget()
@@ -116,12 +161,65 @@ namespace CarTurretGame.Gameplay.Enemies
 
         public void TakeDamage(float amount)
         {
-            if (amount <= 0f) return;
+            if (amount <= 0f || _hasHit) return;
 
             _currentHealth -= amount;
+
             if (_currentHealth <= 0f)
             {
                 Destroy(gameObject);
+                return;
+            }
+
+            PlayHitReaction();
+        }
+
+        private void PlayHitReaction()
+        {
+            if (animator != null)
+            {
+                int hitIndex = Random.Range(0, 3);
+                animator.SetInteger(HitIndexHash, hitIndex);
+                animator.SetTrigger(HitHash);
+            }
+
+            _hitStunTimer = hitStunDuration;
+
+            if (hitFlashMaterial != null)
+            {
+                if (_flashRoutine != null)
+                    StopCoroutine(_flashRoutine);
+
+                _flashRoutine = StartCoroutine(HitFlashRoutine());
+            }
+        }
+
+        private IEnumerator HitFlashRoutine()
+        {
+            SetFlashMaterial(true);
+            yield return new WaitForSeconds(hitFlashDuration);
+            SetFlashMaterial(false);
+            _flashRoutine = null;
+        }
+
+        private void SetFlashMaterial(bool flashOn)
+        {
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                if (renderers[i] == null) continue;
+
+                if (flashOn)
+                {
+                    var flashMats = new Material[_originalMaterials[i].Length];
+                    for (int m = 0; m < flashMats.Length; m++)
+                        flashMats[m] = hitFlashMaterial;
+
+                    renderers[i].materials = flashMats;
+                }
+                else
+                {
+                    renderers[i].materials = _originalMaterials[i];
+                }
             }
         }
 
