@@ -25,7 +25,7 @@ namespace CarTurretGame.Gameplay.Turret
         private void Start()
         {
             _trail.Clear();
-            _trail.emitting = false; // трейл вимкнений на старті
+            _trail.emitting = false;
 
             _trailDelayTimer = trailStartDelay;
             _trailStarted = false;

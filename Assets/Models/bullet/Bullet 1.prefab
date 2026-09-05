@@ -110,6 +110,7 @@ MonoBehaviour:
   damage: 20
   lifeTime: 3
   hitRadius: 0.15
+  trailStartDelay: 0.2
 --- !u!136 &6775009673213701819
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -182,11 +183,11 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Time: 0.5
+  m_Time: 0.4
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.01
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
