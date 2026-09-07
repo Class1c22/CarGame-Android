@@ -110,7 +110,7 @@ MonoBehaviour:
   damage: 20
   lifeTime: 3
   hitRadius: 0.15
-  trailStartDelay: 0.2
+  trailStartDelay: 0.1
 --- !u!136 &6775009673213701819
 CapsuleCollider:
   m_ObjectHideFlags: 0
