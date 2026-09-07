@@ -29,6 +29,9 @@ namespace CarTurretGame.Gameplay
         public float CurrentHealth { get; private set; }
         public float MaxHealth => maxHealth;
 
+        public float LevelLength => levelLength;
+        public float DistanceTraveled => Mathf.Max(0f, transform.position.z - _startZ);
+
         public event Action<float, float> HealthChanged;
         public event Action LevelWon;
         public event Action LevelLost;
@@ -36,6 +39,7 @@ namespace CarTurretGame.Gameplay
         private IInputService _inputService;
 
         private float _baseX;
+        private float _startZ;
         private float _targetOffsetX;
         private float _currentOffsetX;
         private float _driftVelocity;
@@ -56,6 +60,7 @@ namespace CarTurretGame.Gameplay
             col.isTrigger = false;
 
             _baseX = transform.position.x;
+            _startZ = transform.position.z;
             PickNewDriftTarget();
         }
 
