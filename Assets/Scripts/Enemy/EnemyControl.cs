@@ -20,6 +20,10 @@ namespace CarTurretGame.Gameplay.Enemies
         [Header("Death")]
         [SerializeField] private BloodChunkSpawner bloodChunkSpawner;
 
+        [Header("Car Hit Sound")]
+        [SerializeField] private AudioClip carHitSound;
+        [SerializeField] private float carHitVolume = 1f;
+
         [Header("Idle Wander")]
         [SerializeField] private float wanderRadius = 1.5f;
         [SerializeField] private float wanderSpeed = 1f;
@@ -247,8 +251,16 @@ namespace CarTurretGame.Gameplay.Enemies
             if (car != null)
             {
                 _car.TakeDamage(damageToCarPerHit);
+                PlayCarHitSound();
                 Die(car.transform.position);
             }
+        }
+
+        private void PlayCarHitSound()
+        {
+            if (carHitSound == null) return;
+
+            AudioSource.PlayClipAtPoint(carHitSound, transform.position, carHitVolume);
         }
     }
 }

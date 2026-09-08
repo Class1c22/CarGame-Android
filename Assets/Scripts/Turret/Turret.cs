@@ -17,6 +17,10 @@ namespace CarTurretGame.Gameplay.Turret
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private float fireRate = 0.3f;
 
+        [Header("Shooting Sound")]
+        [SerializeField] private AudioClip shotSound;
+        [SerializeField] private float shotVolume = 1f;
+
         [Header("Aim Line")]
         [SerializeField] private LineRenderer aimLine;
         [SerializeField] private float aimLineMaxDistance = 50f;
@@ -91,6 +95,14 @@ namespace CarTurretGame.Gameplay.Turret
             if (firePoint == null || bulletPrefab == null) return;
 
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            PlayShotSound();
+        }
+
+        private void PlayShotSound()
+        {
+            if (shotSound == null) return;
+
+            AudioSource.PlayClipAtPoint(shotSound, firePoint.position, shotVolume);
         }
     }
 }
