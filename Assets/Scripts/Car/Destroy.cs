@@ -8,16 +8,18 @@ namespace CarTurretGame.Gameplay.VFX
     {
         [Header("References")]
         [SerializeField] private CarController car;
+        [SerializeField] private EndGameScreen endGameScreen;
 
-        [Header("Wreck Prefabs (3 шматки)")]
+        [Header("Wreck Prefabs")]
         [SerializeField] private GameObject[] wreckPrefabs;
 
         [Header("Explosion")]
         [SerializeField] private ParticleSystem explosionPrefab;
         [SerializeField] private float explosionLifeTime = 3f;
+        [SerializeField] private AudioClip explosionSound;
+        [SerializeField] private float explosionVolume = 1f;
 
         [Header("What to hide on the car")]
-        [Tooltip("Якщо не заповнено — автоматично візьмуться всі прямі дочірні об'єкти машини")]
         [SerializeField] private GameObject[] carChildrenToHide;
 
         [Header("Spawn")]
@@ -38,6 +40,9 @@ namespace CarTurretGame.Gameplay.VFX
         {
             if (car == null)
                 car = GetComponentInParent<CarController>();
+
+            if (endGameScreen == null)
+                endGameScreen = FindAnyObjectByType<EndGameScreen>();
 
             if (carChildrenToHide == null || carChildrenToHide.Length == 0)
             {
@@ -65,7 +70,12 @@ namespace CarTurretGame.Gameplay.VFX
             if (_hasSpawned) return;
             _hasSpawned = true;
 
+
+            if (endGameScreen != null)
+                endGameScreen.ShowFail();
+
             SpawnExplosion();
+            PlayExplosionSound();
             SpawnWreckPieces();
             HideCar();
         }
@@ -80,6 +90,14 @@ namespace CarTurretGame.Gameplay.VFX
             instance.Play();
 
             Destroy(instance.gameObject, explosionLifeTime);
+        }
+
+        private void PlayExplosionSound()
+        {
+            if (explosionSound == null) return;
+
+            Vector3 origin = car != null ? car.transform.position : transform.position;
+            AudioSource.PlayClipAtPoint(explosionSound, origin, explosionVolume);
         }
 
         private void SpawnWreckPieces()
