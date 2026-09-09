@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -610, y: 357.52}
+  m_AnchoredPosition: {x: -458.7, y: 357.52}
   m_SizeDelta: {x: 100, y: 869.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &58312094
@@ -374,12 +374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.09
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -5859,12 +5859,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6178,7 +6178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 513.31006, y: -43.30011}
+  m_AnchoredPosition: {x: 351.5, y: -43.30011}
   m_SizeDelta: {x: 196.6, y: 146.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364095375
@@ -12139,7 +12139,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 463256495}
   explosionLifeTime: 3
   explosionSound: {fileID: 8300000, guid: deb0a415adaf82345b8a8bc38e4ceebb, type: 3}
-  explosionVolume: 1
+  explosionVolume: 0.5
   carChildrenToHide:
   - {fileID: 2022023112}
   - {fileID: 1470591413}
@@ -12358,7 +12358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -610, y: 357.52}
+  m_AnchoredPosition: {x: -458.7, y: 357.52}
   m_SizeDelta: {x: 100, y: 869.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &756649789
@@ -12430,7 +12430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 513.62, y: 770.3}
+  m_AnchoredPosition: {x: 325.9, y: 770.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &775409386
@@ -12507,7 +12507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 612.58, y: 357.52}
+  m_AnchoredPosition: {x: 449.1, y: 357.52}
   m_SizeDelta: {x: 100, y: 869.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &785631649
@@ -12885,7 +12885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -610, y: 357.52}
+  m_AnchoredPosition: {x: -458.7, y: 357.52}
   m_SizeDelta: {x: 100, y: 869.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &831699245
@@ -13499,7 +13499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 585.8, y: 354.2}
+  m_AnchoredPosition: {x: 420.2, y: 354.2}
   m_SizeDelta: {x: 193.5, y: 1123.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253571591
@@ -13527,7 +13527,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -14081,7 +14081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 513.62, y: -103.9}
+  m_AnchoredPosition: {x: 325.9, y: -103.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443979947
@@ -14461,7 +14461,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3107431256879662740, guid: 3ca68b54591112448b10fce8950eed82, type: 3}
   fireRate: 0.3
   shotSound: {fileID: 8300000, guid: 4543b4b137ed5d64c9209159c997f377, type: 3}
-  shotVolume: 1
+  shotVolume: 0.5
   aimLine: {fileID: 910528083}
   aimLineMaxDistance: 50
   aimLineHitMask:
@@ -19998,10 +19998,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -20066,7 +20066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -610, y: 357.52}
+  m_AnchoredPosition: {x: -458.7, y: 357.52}
   m_SizeDelta: {x: 100, y: 869.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2063648896
