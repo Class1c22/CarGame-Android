@@ -6230,6 +6230,7 @@ GameObject:
   - component: {fileID: 372738276}
   - component: {fileID: 372738278}
   - component: {fileID: 372738277}
+  - component: {fileID: 372738279}
   m_Layer: 0
   m_Name: Level Failed
   m_TagString: Untagged
@@ -6359,6 +6360,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372738275}
   m_CullTransparentMesh: 1
+--- !u!114 &372738279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372738275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fcdb1d28fa17e46a4161f5e5f45e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LetterPopAnimation
+  delayBetweenLetters: 0.08
+  popDuration: 0.25
+  loop: 0
+  playOnEnable: 1
+  normalScale: 1
+  maxScale: 1.5
+  popCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &387166354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12100,6 +12152,28 @@ MonoBehaviour:
   upwardForce: 3
   torqueStrength: 5
   freezeAfterSeconds: 2
+--- !u!23 &680310588 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 9732e508431efbc43b9e55d9a230c32a, type: 3}
+  m_PrefabInstance: {fileID: 831699245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &680310590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680310573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b760540282df34eb1a675f718a9805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarTurretGame.Gameplay.VFX.CarDamageFlash
+  car: {fileID: 680310574}
+  renderers:
+  - {fileID: 680310588}
+  flashMaterial: {fileID: 2100000, guid: 23873fe1e0f9891418349da704ae7cdc, type: 2}
+  flashDuration: 0.1
 --- !u!1 &690602257
 GameObject:
   m_ObjectHideFlags: 0
@@ -12909,6 +12983,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9732e508431efbc43b9e55d9a230c32a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 680310587}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9732e508431efbc43b9e55d9a230c32a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 680310590}
     - targetCorrespondingSourceObject: {fileID: 8565375076658301215, guid: 9732e508431efbc43b9e55d9a230c32a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1330910010}
@@ -13475,7 +13552,7 @@ GameObject:
   - component: {fileID: 1263316635}
   - component: {fileID: 1263316634}
   m_Layer: 0
-  m_Name: Image
+  m_Name: blur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13513,7 +13590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.1764706}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

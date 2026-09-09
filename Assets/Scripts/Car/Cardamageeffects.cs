@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace CarTurretGame.Gameplay.VFX
 {
-
     public class CarDamageEffects : MonoBehaviour
     {
         [Header("References")]
@@ -11,18 +10,27 @@ namespace CarTurretGame.Gameplay.VFX
 
         [Header("Damage threshold")]
         [Range(0f, 1f)]
-        [SerializeField] private float damageStartRatio = 0.5f; // з якого % HP вмикається ефект
+        [SerializeField] private float damageStartRatio = 0.33f;
 
         private void Awake()
         {
             if (car == null)
                 car = GetComponentInParent<CarController>();
+
+
+            if (damageEffect != null)
+            {
+                var main = damageEffect.main;
+                main.playOnAwake = false;
+
+                damageEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            }
         }
 
         private void Start()
         {
-
-            damageEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (damageEffect != null)
+                damageEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
         private void OnEnable()
