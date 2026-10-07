@@ -12564,7 +12564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &773021616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21309,7 +21309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndGameScreen
   car: {fileID: 0}
   screenRoot: {fileID: 2025412943}
-  winScreenRoot: {fileID: 0}
+  winScreenRoot: {fileID: 773021615}
   showDelay: 3
   winShowDelay: 0.5
 --- !u!1 &1979658620
@@ -21420,7 +21420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2025412944
 RectTransform:
   m_ObjectHideFlags: 0
