@@ -32,6 +32,9 @@ namespace CarTurretGame.Gameplay
         public float LevelLength => levelLength;
         public float DistanceTraveled => Mathf.Max(0f, transform.position.z - _startZ);
 
+        // Z-координата фінішу (від стартової точки, а не від нуля світу)
+        public float FinishZ => _startZ + levelLength;
+
         public event Action<float, float> HealthChanged;
         public event Action LevelWon;
         public event Action LevelLost;
@@ -79,10 +82,17 @@ namespace CarTurretGame.Gameplay
             Vector3 pos = transform.position;
             pos.z += speed * Time.deltaTime;
             pos.x = _baseX + _currentOffsetX;
-            transform.position = pos;
 
-            if (pos.z >= levelLength)
+            // Фініш рахуємо від стартової точки, щоб збігалося з лічильником метрів
+            if (pos.z >= FinishZ)
+            {
+                pos.z = FinishZ; // зупиняємось рівно на фініші, без перебігу
+                transform.position = pos;
                 Win();
+                return;
+            }
+
+            transform.position = pos;
         }
 
         private void UpdateDrift()
