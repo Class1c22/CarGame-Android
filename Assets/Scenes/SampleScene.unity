@@ -12564,7 +12564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &773021616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13497,7 +13497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: 0}
+  m_AnchoredPosition: {x: 1344, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &970909696
@@ -13510,7 +13510,7 @@ Animator:
   m_GameObject: {fileID: 970909694}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cb49b9004a890004393a4d1156f53c61, type: 2}
+  m_Controller: {fileID: 9100000, guid: 24323f42bcf15cc499ca61afcafda889, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -21307,8 +21307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f43a23e546ede41bd6e9fabe786ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndGameScreen
+  car: {fileID: 0}
   screenRoot: {fileID: 2025412943}
+  winScreenRoot: {fileID: 0}
   showDelay: 3
+  winShowDelay: 0.5
 --- !u!1 &1979658620
 GameObject:
   m_ObjectHideFlags: 0
